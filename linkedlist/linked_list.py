@@ -109,13 +109,3 @@ class LinkedList:
         return list_ele
 
 
-linkedlist = LinkedList()
-linkedlist.append(10)
-linkedlist.append(15)
-linkedlist.append(8)
-linkedlist.append(30)
-linkedlist.append(20)
-linkedlist.insert(40, 40)
-
-print(linkedlist.to_list())
-

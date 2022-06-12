@@ -1,16 +1,14 @@
-# This is a sample Python script.
+from linkedlist.iscircular import is_circular
+from linkedlist.linked_list import LinkedList
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+linkedlist = LinkedList()
+linkedlist.append(10)
+linkedlist.append(15)
+linkedlist.append(8)
+linkedlist.append(30)
+linkedlist.append(20)
+linkedlist.insert(40, 40)
 
+print(is_circular(linkedlist.head))
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print(linkedlist.to_list())
