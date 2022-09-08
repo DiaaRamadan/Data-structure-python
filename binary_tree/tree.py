@@ -60,9 +60,6 @@ class Tree:
                     break
                 current = current.get_right_child()
 
-    def delete(self, value):
-        pass
-
     @staticmethod
     def _is_leaf(node):
         return not node.has_right_child and not node.has_left_child()
@@ -114,6 +111,49 @@ class Tree:
         self._post_order_traverse(node.get_right_child(), list_of_nodes)
         list_of_nodes.append(self._root.get_value())
 
+    def get_depth(self):
+        return self._get_depth(self._root)
+
+    def _get_depth(self, root: Node):
+        if root is None:
+            return -1
+        if self._is_leaf(root):
+            return 0
+        return max(self._get_depth(root.get_right_child()), self._get_depth(root.get_left_child())) + 1
+
+    def delete(self, value):
+        self._delete(self._root, value)
+
+    def _delete(self, root: Node, value):
+        if root is None:
+            return
+        if root.get_value() > value:
+            root.set_left_child(self._delete(root.get_left_child(), value))
+        elif root.get_value() < value:
+            root.set_right_child(self._delete(root.get_right_child(), value))
+        else:
+            if root.get_left_child() is None:
+                temp = root.get_right_child()
+                root = None
+                return temp
+            elif root.get_right_child() is None:
+                temp = root.get_left_child()
+                root = None
+                return temp
+
+            min_child = self._find_min(root)
+            root.set_value(min_child.get_value())
+
+            root.set_right_child(self._delete(root.get_right_child(), min_child.get_value()))
+            return root
+
+    @staticmethod
+    def _find_min(root: Node):
+        current = root
+        while current.get_left_child() is not None:
+            current = current.get_left_child
+        return current
+
 
 tree = Tree()
 tree.insert(5)
@@ -121,5 +161,6 @@ tree.insert(3)
 tree.insert(7)
 tree.insert(6)
 tree.insert(4)
-print(tree.search(5))
-print(tree.search(10))
+tree.insert(2)
+
+print(tree.get_depth())
